@@ -1,9 +1,15 @@
-import Login from "./components/Login";
+// import Login from "./views/Login";
+// import Register from "./views/Register";
+import HomePage from "./views/HomePage";
+
 import React from "react";
+
 function App() {
   return (
     <div className="App">
-      <Login></Login>
+      {/* <Login></Login> */}
+      {/* <Register></Register> */}
+      <HomePage />
     </div>
   );
 }
