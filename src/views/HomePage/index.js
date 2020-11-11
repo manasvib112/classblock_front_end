@@ -1,6 +1,7 @@
 import React from "react";
 import Author from "../../components/Author";
 import Header from "../../components/Header";
+import Post from "../../components/Post";
 import "./style.css";
 
 export default function homepage(props) {
@@ -11,6 +12,8 @@ export default function homepage(props) {
           <Header />
           <div className="body-section">
             <Author />
+            <Post />
+            <Post />
           </div>
         </div>
       </div>
