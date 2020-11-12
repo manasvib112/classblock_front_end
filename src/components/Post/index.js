@@ -7,8 +7,10 @@ import {
   LaunchSharp,
   MoreHorizSharp,
 } from "@material-ui/icons";
+import Comment from "../Comment";
 
 export default function Post(props) {
+  console.log(props);
   return (
     <div className="post">
       <div className="post-top-section">
@@ -40,7 +42,16 @@ export default function Post(props) {
           </div>
         </div>
       </div>
-      <div className="bottom-section"></div>
+      <div className="bottom-section">
+        {props.body.map((item) => (
+          <Comment
+            body={item.comment}
+            name={item.name}
+            details={item.details}
+            profile={item.profile}
+          />
+        ))}
+      </div>
     </div>
   );
 }
