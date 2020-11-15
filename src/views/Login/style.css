@@ -145,3 +145,10 @@
   margin-left: 5px;
   color: #2f80ed;
 }
+.left-container form .show-password {
+  font-size: 0.5rem;
+  margin-left: 20px;
+  margin-top: 5px;
+  cursor: pointer;
+  color: #1dd8ff;
+}

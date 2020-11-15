@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 function Login(props) {
+  const [uid, setUid] = useState("");
+  const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
+  const handleUid = (event) => {
+    const value = event.target.value;
+    setUid(value);
+    console.log(uid);
+  };
+  const handlePassword = (event) => {
+    const value = event.target.value;
+    setPassword(value);
+    console.log(password);
+  };
+
   return (
     <div className="main-container">
       <div className="left-section">
@@ -14,8 +28,26 @@ function Login(props) {
             <div className="tab">Teacher</div>
           </div>
           <form>
-            <input type="text" placeholder="Enrollment"></input>
-            <input type="password" placeholder="Password"></input>
+            <input
+              type="text"
+              placeholder="Enrollment"
+              value={uid}
+              onChange={handleUid}
+            ></input>
+            <input
+              type={visible ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={handlePassword}
+            ></input>
+            <span
+              className="show-password"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              Show Password
+            </span>
             <button type="submit">Sign In</button>
           </form>
           Don’t have an account?
