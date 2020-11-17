@@ -7,23 +7,24 @@
   justify-content: space-between;
   padding: 0 40px;
 }
-.left-section {
+.header div {
+  width: 33%;
   display: flex;
   align-content: center;
   align-items: center;
   justify-content: center;
 }
-.left-section img {
+.header .left-section img {
   width: 46px;
   height: 46px;
   border-radius: 7px;
   margin-right: 7px;
 }
-.left-section input {
+.header .left-section input.search-bar {
   background: #ffffff;
   border-radius: 100px;
   width: 215px;
-  height: 27px;
+  height: 27px !important;
   outline: none;
   border: none;
   font-family: Raleway;
@@ -36,34 +37,39 @@
   padding-left: 40px;
 }
 
-.middle-section svg {
+.header .middle-section svg {
   margin: 0 10px;
   transition: all 0.4s ease;
 }
-.middle-section svg:hover {
+.header .middle-section svg:hover {
   color: #ffffff;
 }
-.right-section img {
+.header .right-section .img-section,
+.header .right-section img {
   width: 46px;
   height: 46px;
   border-radius: 50%;
 }
-.right-section {
+.header .right-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
 }
-.right-section .text-section {
+.header .right-section .text-section {
   font-family: Raleway;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
-  text-align: right;
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
   color: #ffffff;
   margin: 0 10px;
 }
-.right-section .text-section span {
+.header .right-section .text-section span {
   font-weight: normal;
 }

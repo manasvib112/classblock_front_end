@@ -8,7 +8,7 @@
     ),
     #1dd8ff;
 }
-.left-section {
+.main-container .left-section {
   height: 100vh;
   width: 343px;
   background-color: #fff;
@@ -146,9 +146,13 @@
   color: #2f80ed;
 }
 .left-container form .show-password {
-  font-size: 0.5rem;
-  margin-left: 20px;
+  text-align: right;
   margin-top: 5px;
   cursor: pointer;
+}
+
+.left-container .show-password span {
+  font-size: 0.7rem;
+  font-weight: 700;
   color: #1dd8ff;
 }

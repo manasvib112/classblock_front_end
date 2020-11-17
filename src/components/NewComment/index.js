@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import './style.css'
-import image from '../../../src/asset/images/images.png'
 import profile from '../../../src/asset/images/profile.jpeg'
-import { PhotoLibrary, InsertEmoticon } from '@material-ui/icons'
 import axios from 'axios'
 
-export default function Author({ total, setTotal }) {
+export default function NewComment({ total, setTotal, id }) {
   const [post, setPost] = useState('')
   const [focus, setFocus] = useState(false)
   const handlePost = (event) => {
@@ -20,50 +18,40 @@ export default function Author({ total, setTotal }) {
   const handleClick = (event) => {
     event.preventDefault()
     axios
-      .post(
-        'http://localhost:5000/api/post/add',
-        { content: post },
+      .put(
+        'http://localhost:5000/api/post/add-comment',
+        { content: post, id },
         {
           headers: { Authorization: localStorage.getItem('token') }
         }
       )
       .then((response) => {
+        console.log(response)
         setTotal(total + 1)
         setPost('')
       })
       .catch((error) => console.log(error))
   }
-  const handleLike = (event) => {}
   return (
-    <div className='author'>
-      <div className='author-top'>
+    <div className='new-comment'>
+      <div className='new-comment-top'>
         <img src={profile} alt='profile' />
         <form>
           <textarea
             type='text'
-            placeholder='Whats on your mind?'
+            placeholder='Comment...'
             className={focus ? 'active' : ''}
             value={post}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handlePost}
           ></textarea>
-          {post.length > 5 ? (
+          {post.length >= 1 ? (
             <div className='button-row'>
               <button onClick={handleClick}>Post</button>
             </div>
           ) : null}
         </form>
-      </div>
-      <div className='author-bottom'>
-        <div className='photo-option'>
-          <PhotoLibrary />
-          <span>Photo/Video</span>
-        </div>
-        <div className='activity-option'>
-          <InsertEmoticon />
-          <span>Feeling/Activity</span>
-        </div>
       </div>
     </div>
   )

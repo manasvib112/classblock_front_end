@@ -1,18 +1,9 @@
-import Login from "./views/Login";
-// import Register from "./views/Register";
-
-import HomePage from "./views/HomePage";
-
-import React from "react";
+import React from 'react'
+import Routing from './Routing'
+import './App.css'
 
 function App() {
-  return (
-    <div className="App">
-      <Login></Login>
-      {/* <Register></Register> */}
-      {/* <HomePage /> */}
-    </div>
-  );
+  return <Routing />
 }
 
-export default App;
+export default App

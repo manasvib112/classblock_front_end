@@ -1,8 +1,8 @@
 .comment-section {
-  max-width: 80%;
+  max-width: 88%;
   display: flex;
   width: 90%;
-  border-radius: 15px;
+  border-radius: 0.2rem;
   flex-direction: column;
   padding: 5px 10px;
   background-color: #e5e5e5;
@@ -18,7 +18,7 @@
   font-size: 10px;
   color: grey;
   margin: 0px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 .comment-container img {
   border-radius: 50%;

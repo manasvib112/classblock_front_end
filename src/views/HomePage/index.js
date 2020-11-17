@@ -1,50 +1,72 @@
-import React from "react";
-import Author from "../../components/Author";
-import Header from "../../components/Header";
-import Post from "../../components/Post";
-import profile1 from "../../../src/asset/images/profile1.jpeg";
-import profile2 from "../../../src/asset/images/profile2.jpeg";
-import profile3 from "../../../src/asset/images/profile3.jpeg";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import Author from '../../components/Author'
+import Header from '../../components/Header'
+import Post from '../../components/Post'
+import './style.css'
+import Loading from '../../components/Loading'
 
-import "./style.css";
-
-export default function homepage(props) {
+export default function Homepage(props) {
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem('userData'))
+  )
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [totalPosts, setTotalPosts] = useState(0)
+  useEffect(() => {
+    if (localStorage.getItem('userData') == null) {
+      console.log('if part run')
+      axios
+        .get('http://localhost:5000/api/user/current', {
+          headers: {
+            Authorization: token
+          }
+        })
+        .then((response) => {
+          if (response.data) {
+            setUserData(response.data)
+            localStorage.setItem('userData', JSON.stringify(response.data))
+          }
+        })
+        .catch((error) => console.log(error))
+    }
+    axios
+      .get('http://localhost:5000/api/post/myposts', {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then((response) => {
+        console.log(response.data.mypost)
+        setData(response.data.mypost)
+        setTotalPosts(response.data.length)
+        setLoading(false)
+      })
+      .catch((error) => console.log(error))
+  }, [totalPosts])
   return (
-    <div className="home-wrappper">
-      <div className="home-container">
-        <div className="home-main">
-          <Header />
-          <div className="body-section">
-            <Author />
-            <Post
-              body={[
-                {
-                  name: "manasvi",
-                  comment: "beautiful",
-                  details: "3yr student cutest girl in nfl",
-                  profile: profile1,
-                },
-                {
-                  name: "Aditya",
-                  comment: "lovely",
-                  details: "Works in JIO",
-                  profile: profile2,
-                },
-              ]}
-            />
-            <Post
-              body={[
-                {
-                  name: "Princy",
-                  comment: "beautiful pic",
-                  details: "3yr student",
-                  profile: profile3,
-                },
-              ]}
-            />
+    <div className='home-wrappper'>
+      <div className='home-container'>
+        <div className='home-main'>
+          <Header user={userData ? userData.name : ''} />
+          <div className='body-section'>
+            <Author total={totalPosts} setTotal={setTotalPosts} />
+            {data
+              ? data.map((item) => (
+                  <Post
+                    key={item._id}
+                    id={item._id}
+                    user={item.postedBy.name}
+                    content={item.content}
+                    date={item.date_created}
+                  />
+                ))
+              : "Sorry! you Don't Have any post"}
+            {loading ? <Loading /> : null}
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
