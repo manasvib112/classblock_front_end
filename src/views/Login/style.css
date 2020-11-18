@@ -25,6 +25,18 @@
   font-size: 12px;
   line-height: 14px;
 }
+.centered {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.centered h1,
+.centered h2 {
+  margin: 40px 0;
+  height: 40px;
+}
 .left-container h1 {
   margin: 0px;
   margin-top: 20px;
@@ -115,7 +127,8 @@
   padding: 0px 20px;
   color: #000000;
 }
-.left-container form button {
+.left-container form button,
+div.centered button {
   width: 93px;
   height: 25px;
   font-family: Raleway;

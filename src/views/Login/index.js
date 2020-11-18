@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 import React, { useState } from 'react'
 import axios from 'axios'
 import './style.css'
 import { Link, Redirect } from 'react-router-dom'
+=======
+import React, { useState } from "react";
+import axios from "axios";
+import "./style.css";
+import { Redirect } from "react-router-dom";
+>>>>>>> registration
 
 function Login(props) {
-  const [uid, setUid] = useState('')
-  const [password, setPassword] = useState('')
-  const [visible, setVisible] = useState(false)
-  const [redirect, setRedirect] = useState(false)
+  const [uid, setUid] = useState("");
+  const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const handleUid = (event) => {
+<<<<<<< HEAD
     const value = event.target.value
     setUid(value)
   }
@@ -16,52 +24,70 @@ function Login(props) {
     const value = event.target.value
     setPassword(value)
   }
+=======
+    const value = event.target.value;
+    setUid(value);
+    console.log(uid);
+  };
+  const handlePassword = (event) => {
+    const value = event.target.value;
+    setPassword(value);
+    console.log(password);
+  };
+>>>>>>> registration
   const postData = async (url, payload) => {
     axios
       .post(url, payload)
       .then((response) => {
+<<<<<<< HEAD
         const { data } = response
         let { token } = data
         console.log(data)
         localStorage.setItem('token', token)
         setRedirect(true)
+=======
+        const { data } = response;
+        let { token } = data;
+        localStorage.setItem("token", token);
+        setRedirect(true);
+>>>>>>> registration
       })
-      .catch((error) => error)
-  }
+      .catch((error) => error);
+  };
   const handleLogin = (event) => {
-    event.preventDefault()
-    postData('http://localhost:5000/api/user/login', { uid, password })
-  }
-  if (redirect) return <Redirect to='/home' />
+    event.preventDefault();
+    postData("http://localhost:5000/api/user/login", { uid, password });
+  };
+  if (redirect) return <Redirect to="/home" />;
 
   return (
-    <div className='main-container'>
-      <div className='left-section'>
-        <div className='left-container'>
+    <div className="main-container">
+      <div className="left-section">
+        <div className="left-container">
           <span>Welcome to</span>
           <h1>Classblock</h1>
           <h2>Login</h2>
-          <div className='tab-row'>
-            <div className='tab active'>Student</div>
-            <div className='tab'>Teacher</div>
+          <div className="tab-row">
+            <div className="tab active">Student</div>
+            <div className="tab">Teacher</div>
           </div>
           <form>
             <input
-              type='text'
-              placeholder='Enrollment'
+              type="text"
+              placeholder="Enrollment"
               value={uid}
               onChange={handleUid}
             ></input>
             <input
-              type={visible ? 'text' : 'password'}
-              placeholder='Password'
+              type={visible ? "text" : "password"}
+              placeholder="Password"
               value={password}
               onChange={handlePassword}
             ></input>
-            <div className='show-password'>
+            <div className="show-password">
               <span
                 onClick={() => {
-                  setVisible(!visible)
+                  setVisible(!visible);
                 }}
               >
                 Show Password
@@ -70,11 +96,15 @@ function Login(props) {
             <button onClick={handleLogin}>Sign In</button>
           </form>
           Don’t have an account?
+<<<<<<< HEAD
           <Link to='/register'>Sign up!</Link>
+=======
+          <a href="/">Sign up!</a>
+>>>>>>> registration
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
