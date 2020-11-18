@@ -26,7 +26,6 @@ export default function NewComment({ total, setTotal, id }) {
         }
       )
       .then((response) => {
-        console.log(response)
         setTotal(total + 1)
         setPost('')
       })

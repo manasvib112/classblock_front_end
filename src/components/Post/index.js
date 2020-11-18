@@ -10,6 +10,7 @@ import {
 import axios from 'axios'
 import Comment from '../Comment'
 import NewComment from '../NewComment'
+import { isEmpty } from 'lodash'
 
 const formatDate = (dateString) => {
   let date = String(Date(dateString)).split(' ')
@@ -17,19 +18,54 @@ const formatDate = (dateString) => {
   return date
 }
 
-export default function Post({
-  id,
-  date,
-  user,
-  content,
-  media = null,
-  liked = false
-}) {
+export default function Post({ id, date, user, content, media = null }) {
+  const userData = JSON.parse(localStorage.getItem('userData'))
   const date_created = formatDate(date)
   const [commentsData, setCommentsData] = useState([])
   const [total, setTotal] = useState(0)
-  const [isLiked, setIsLiked] = useState(liked)
-
+  const Authorization = localStorage.getItem('token')
+  const [isLiked, setIsLiked] = useState(false)
+  const [likeCount, setLikeCount] = useState()
+  const [likes, setLikes] = useState([])
+  // console.log(content, isLiked, likes)
+  const handleLike = () => {
+    if (isLiked === true) {
+      console.log('calling unlike')
+      axios
+        .put(
+          'http://localhost:5000/api/post/unlike',
+          { id },
+          { headers: { Authorization } }
+        )
+        .then((response) => {
+          if (!isEmpty(response)) {
+            setIsLiked(false)
+            const val = likeCount - 1
+            setLikeCount(val)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      axios
+        .put(
+          'http://localhost:5000/api/post/like',
+          { id },
+          { headers: { Authorization } }
+        )
+        .then((response) => {
+          if (!isEmpty(response)) {
+            setIsLiked(true)
+            const val = likeCount + 1
+            setLikeCount(val)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
   useEffect(() => {
     axios
       .get('http://localhost:5000/api/post/get-comments', {
@@ -38,18 +74,32 @@ export default function Post({
         params: { id }
       })
       .then((response) => {
-        console.log('comments', response.data)
         if (response.data) {
-          console.log('total updated')
           setTotal(response.data.length)
           setCommentsData(response.data)
         }
       })
       .catch((error) => console.log(error))
+    if (likes && userData) {
+      let check = likes.filter((item) => item._id === userData.id)
+      setIsLiked(check.length > 0)
+      // console.log('user', content, check, likes, isLiked)
+    }
+    axios
+      .get('http://localhost:5000/api/post/get-likes', {
+        method: 'GET',
+        headers: { Authorization: localStorage.getItem('token') },
+        params: { id }
+      })
+      .then((response) => {
+        // console.log(response)
+        if (response) {
+          setLikeCount(response.data.count)
+          setLikes(response.data.likes)
+        }
+      })
+      .catch((error) => console.log(error))
   }, [total])
-  // const handleLiked = () => {
-  //   axios.put('http://localhost:5000/api/post/like')
-  // }
   return (
     <div className='post'>
       <div className='post-top-section'>
@@ -65,9 +115,13 @@ export default function Post({
         {media ? <div className='media-container'></div> : null}
 
         <div className='audience-interaction'>
-          <div className='like'>
+          <div
+            className={isLiked ? 'like active' : 'like'}
+            onClick={handleLike}
+          >
             <InsertEmoticon />
-            <span>Like</span>
+            <span>Like </span>
+            {likeCount < 1 ? null : <div className={'count'}>{likeCount}</div>}
           </div>
           <div className='comment'>
             <InsertCommentRounded />

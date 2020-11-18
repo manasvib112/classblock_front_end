@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './style.css'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 function Login(props) {
   const [uid, setUid] = useState('')
@@ -11,12 +11,10 @@ function Login(props) {
   const handleUid = (event) => {
     const value = event.target.value
     setUid(value)
-    console.log(uid)
   }
   const handlePassword = (event) => {
     const value = event.target.value
     setPassword(value)
-    console.log(password)
   }
   const postData = async (url, payload) => {
     axios
@@ -24,6 +22,7 @@ function Login(props) {
       .then((response) => {
         const { data } = response
         let { token } = data
+        console.log(data)
         localStorage.setItem('token', token)
         setRedirect(true)
       })
@@ -71,7 +70,7 @@ function Login(props) {
             <button onClick={handleLogin}>Sign In</button>
           </form>
           Don’t have an account?
-          <a href='/'>Sign up!</a>
+          <Link to='/register'>Sign up!</Link>
         </div>
       </div>
     </div>

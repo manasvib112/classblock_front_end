@@ -15,7 +15,7 @@ export default function Homepage(props) {
   const [loading, setLoading] = useState(true)
   const [totalPosts, setTotalPosts] = useState(0)
   useEffect(() => {
-    if (localStorage.getItem('userData') == null) {
+    if (!localStorage.getItem('userData')) {
       console.log('if part run')
       axios
         .get('http://localhost:5000/api/user/current', {
@@ -38,7 +38,6 @@ export default function Homepage(props) {
         }
       })
       .then((response) => {
-        console.log(response.data.mypost)
         setData(response.data.mypost)
         setTotalPosts(response.data.length)
         setLoading(false)
@@ -60,6 +59,7 @@ export default function Homepage(props) {
                     user={item.postedBy.name}
                     content={item.content}
                     date={item.date_created}
+                    likes={item.likes}
                   />
                 ))
               : "Sorry! you Don't Have any post"}
