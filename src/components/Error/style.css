@@ -1,0 +1,7 @@
+div.error-container {
+  margin: 2px 0;
+  background-color: #fcece9;
+  padding: 2px;
+  font-size: 0.6rem;
+  color: #f00;
+}

@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import './style.css'
 import { Link, Redirect } from 'react-router-dom'
+import Error from '../../components/Error'
+import { isEmpty } from 'lodash'
 
 function Login(props) {
+  const [error, setError] = useState({})
+  const [role, setRole] = useState('student')
   const [uid, setUid] = useState('')
   const [password, setPassword] = useState('')
   const [visible, setVisible] = useState(false)
@@ -26,10 +30,30 @@ function Login(props) {
         localStorage.setItem('token', token)
         setRedirect(true)
       })
-      .catch((error) => error)
+      .catch((error) => {
+        console.log(error.response)
+        setError({
+          unauthorized: `${
+            error.response.data.error
+              ? error.response.data.error
+              : 'Invalid credentials'
+          }`
+        })
+      })
   }
   const handleLogin = (event) => {
     event.preventDefault()
+    if (isEmpty(uid)) {
+      setError({
+        ...error,
+        ...{
+          uid: `${
+            role === 'student' ? 'Enrollment' : 'Employee ID'
+          } can't be blank`
+        }
+      })
+      return
+    }
     postData('http://localhost:5000/api/user/login', { uid, password })
   }
   if (redirect) return <Redirect to='/home' />
@@ -42,22 +66,35 @@ function Login(props) {
           <h1>Classblock</h1>
           <h2>Login</h2>
           <div className='tab-row'>
-            <div className='tab active'>Student</div>
-            <div className='tab'>Teacher</div>
+            <div
+              className={role === 'student' ? 'tab active' : 'tab'}
+              onClick={() => setRole('student')}
+            >
+              Student
+            </div>
+            <div
+              className={role === 'teacher' ? 'tab active' : 'tab'}
+              onClick={() => setRole('teacher')}
+            >
+              Teacher
+            </div>
           </div>
           <form>
             <input
               type='text'
-              placeholder='Enrollment'
+              placeholder={role === 'student' ? 'Enrollment' : 'Employment ID'}
               value={uid}
               onChange={handleUid}
             ></input>
+            {error.uid ? <Error text={error.uid} /> : null}
             <input
               type={visible ? 'text' : 'password'}
               placeholder='Password'
               value={password}
               onChange={handlePassword}
             ></input>
+            {error.unauthorized ? <Error text={error.unauthorized} /> : null}
+
             <div className='show-password'>
               <span
                 onClick={() => {
