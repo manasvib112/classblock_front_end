@@ -52,7 +52,7 @@
   min-height: 150px;
   height: auto;
 }
-.author-top img {
+.author-top img.profile {
   border-radius: 50%;
   border: 1px solid #e5e5e5;
   margin: 0px 5px;
@@ -106,4 +106,20 @@
   margin: 0.2rem 1.2rem;
   padding: 0.2rem 0.6rem;
   color: #fff;
+}
+.thumbnail {
+  display: flex;
+  align-content: center;
+  background-color: #ededed;
+  width: 90%;
+  margin-right: 10px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail img {
+  border-radius: 0;
+  max-width: 100%;
+  max-height: 200px;
 }

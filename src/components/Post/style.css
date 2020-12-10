@@ -75,11 +75,19 @@
 }
 .post-middle-section .media-container {
   width: 100%;
-  min-height: 300px;
   margin-top: 10px;
   box-sizing: border-box;
-  background: #1dd8ff;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  background: #ededed;
 }
+.post-middle-section .media-container img {
+  max-width: 100%;
+  max-height: 300px;
+}
+
 .post-middle-section .audience-interaction {
   display: flex;
   align-items: center;

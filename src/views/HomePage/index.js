@@ -60,6 +60,7 @@ export default function Homepage(props) {
                     content={item.content}
                     date={item.date_created}
                     likes={item.likes}
+                    media={item.media}
                   />
                 ))
               : "Sorry! you Don't Have any post"}
