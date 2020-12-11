@@ -1,4 +1,8 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   background-color: #1dd8ff;
   height: 61px;
   display: flex;
@@ -6,6 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
+  z-index: 100;
 }
 .header div {
   width: 33%;

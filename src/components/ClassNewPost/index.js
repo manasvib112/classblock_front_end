@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './style.css'
 import profile from '../../../src/asset/images/profile.jpeg'
-import { PhotoLibrary, InsertEmoticon } from '@material-ui/icons'
+import { PhotoLibrary, InsertEmoticon, HelpOutline } from '@material-ui/icons'
 import axios from 'axios'
+import { Checkbox, FormControlLabel } from '@material-ui/core'
 
-export default function Author({ total, setTotal }) {
+export default function Author({ total, setTotal, classId }) {
   const fileUploader = useRef(null)
+  const [isQuery, setIsQuery] = useState(false)
   const [post, setPost] = useState('')
   const [focus, setFocus] = useState(false)
   const [media, setMedia] = useState(null)
@@ -34,8 +36,8 @@ export default function Author({ total, setTotal }) {
     console.log({ content: post, media })
     axios
       .post(
-        'http://localhost:5000/api/post/add',
-        { content: post, media },
+        'http://localhost:5000/api/classroom/add-post',
+        { content: post, media, isQuery, class: classId },
         {
           headers: { Authorization: localStorage.getItem('token') }
         }
@@ -81,8 +83,8 @@ export default function Author({ total, setTotal }) {
     setMedia(null)
   }
   return (
-    <div className='author'>
-      <div className='author-top'>
+    <div className='class author'>
+      <div className='class author-top'>
         <img className='profile' src={profile} alt='profile' />
         <form>
           <textarea
@@ -118,9 +120,14 @@ export default function Author({ total, setTotal }) {
             onChange={handleMediaClick}
           ></input>
         </div>
-        <div className='activity-option'>
-          <InsertEmoticon />
-          <span>Feeling/Activity</span>
+        <div
+          className={isQuery ? 'activity-option active' : 'activity-option'}
+          onClick={() => {
+            setIsQuery(!isQuery)
+          }}
+        >
+          <HelpOutline />
+          <span>Post as a Doubt</span>
         </div>
       </div>
     </div>

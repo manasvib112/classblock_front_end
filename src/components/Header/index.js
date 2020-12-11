@@ -26,6 +26,9 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  const userProfile = () => {
+    history.push('/profile')
+  }
 
   const firstname = name[0]
   const open = Boolean(anchorEl)
@@ -42,11 +45,15 @@ export default function Header() {
       </div>
       <div className='middle-section'>
         <Notifications fontSize='large' />
-        <HomeRounded fontSize='large' />
-        <Link style={{ color: '#000' }} to={`/classroom/id=${id}`}>
+        <Link style={{ color: '#000' }} to={'/home'}>
+          <HomeRounded fontSize='large' />
+        </Link>
+        <Link style={{ color: '#000' }} to={'/my-classes'}>
           <PeopleAltRounded fontSize='large' />
         </Link>
-        <PersonRounded fontSize='large' />
+        <Link style={{ color: '#000' }} to={'/profile'}>
+          <PersonRounded fontSize='large' />
+        </Link>
       </div>
       <div className='right-section'>
         <div className='text-section'>
@@ -60,6 +67,7 @@ export default function Header() {
             open={open}
             anchorEl={anchorEl}
             onClose={handleClose}
+            vertical
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'center'
@@ -70,7 +78,7 @@ export default function Header() {
             }}
           >
             <Typography className={{ padding: '2rem', height: '100px' }}>
-              <Button onClick={logout}>Logout</Button>
+              <Button onClick={logout}>Profile</Button>
             </Typography>
           </Popover>
         </div>

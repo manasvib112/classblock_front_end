@@ -31,14 +31,21 @@ function Login(props) {
         setRedirect(true)
       })
       .catch((error) => {
-        console.log(error.response)
-        setError({
-          unauthorized: `${
-            error.response.data.error
-              ? error.response.data.error
-              : 'Invalid credentials'
-          }`
-        })
+        // debugger
+        console.error(Object.assign({}, error))
+        if (error.response) {
+          setError({
+            unauthorized: `${
+              error.response.data.error
+                ? error.response.data.error
+                : 'Invalid credentials'
+            }`
+          })
+        } else {
+          setError({
+            server: 'Server error: timeout'
+          })
+        }
       })
   }
   const handleLogin = (event) => {
@@ -53,6 +60,21 @@ function Login(props) {
         }
       })
       return
+    } else {
+      const err = error.uid ? delete error[uid] : error
+      setError(err)
+    }
+    if (isEmpty(password)) {
+      setError({
+        ...error,
+        ...{
+          password: "password can't be blank"
+        }
+      })
+      return
+    } else {
+      const err = error.password ? delete error[password] : error
+      setError(err)
     }
     postData('http://localhost:5000/api/user/login', { uid, password })
   }
@@ -94,6 +116,8 @@ function Login(props) {
               onChange={handlePassword}
             ></input>
             {error.unauthorized ? <Error text={error.unauthorized} /> : null}
+            {error.server ? <Error text={error.server} /> : null}
+            {error.password ? <Error text={error.password} /> : null}
 
             <div className='show-password'>
               <span
