@@ -40,6 +40,9 @@ export default function UserProfile() {
     )
       .then((response) => {
         if (response) {
+          const data = JSON.parse(localStorage.userData)
+          data.image = source
+          localStorage.setItem('userData', JSON.stringify(data))
           setUploading(false)
         }
       })
