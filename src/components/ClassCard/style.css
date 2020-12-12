@@ -1,0 +1,51 @@
+.class-card-container {
+  width: 500px;
+  max-width: 500px;
+  background-color: #1fd8ff;
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 10px;
+  padding: 20px;
+  filter: drop-shadow(0px 1px 10px rgba(0, 0, 0, 0.2));
+  border-radius: 1rem;
+}
+
+.class-card-container h1 {
+  color: white;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.class-time {
+  font-size: 0.8rem;
+  color: white;
+  margin-right: 8px;
+  margin-bottom: 2px;
+}
+.class-card-container .info-bar {
+  width: 100%;
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.class-card-container .info-bar .students span {
+  font-weight: 500;
+  display: inline-block;
+  color: white;
+  margin: 5px 0;
+}
+
+.class-card-container .info-bar button {
+  outline: none;
+  background-color: #fff;
+  border: none;
+  font-weight: 500;
+  padding: 5px 10px;
+  color: #1fd8ff;
+  cursor: pointer;
+  border-radius: 0.8rem;
+}

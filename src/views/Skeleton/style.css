@@ -1,0 +1,21 @@
+.skeleton-view {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0 10%;
+  padding-top: 60px;
+}
+.skeleton-body {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.skeleton-post {
+  margin: 30px 0;
+}
+.skeleton-class-card {
+  margin: 10px;
+  filter: drop-shadow(0px 1px 10px rgba(0, 0, 0, 0.2));
+  border-radius: 20px;
+}

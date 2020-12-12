@@ -1,0 +1,75 @@
+.user-profile-container {
+  display: flex;
+  width: 100vw;
+  padding-top: 160px;
+  height: 100vh;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-profile-form {
+  background-color: #fff;
+  width: 50%;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  min-height: 100px;
+  border-radius: 1rem;
+  padding: 0 25px;
+}
+.user-profile-image-wrapper {
+  position: relative;
+}
+.image-uploader {
+  display: none;
+}
+.user-profile-image-wrapper:hover .image-uploader {
+  height: 190px;
+  width: 190px;
+  top: 5px;
+  left: 5px;
+  background-color: #00000064;
+  border-radius: 50%;
+  position: absolute;
+  content: 'Upload Image';
+  color: #fff;
+  z-index: 20;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.user-profile-image {
+  height: 200px;
+  width: 100%;
+  margin-top: -100px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.user-profile-image img {
+  max-height: 200px;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 5px solid #ededed;
+  filter: drop-shadow(0px 1px 10px rgba(0, 0, 0, 0.2));
+}
+
+.user-profile-section {
+  padding: 20px 10%;
+}
+
+.button-row .save {
+  background-color: #1fd8ff;
+  padding: 5px 25px;
+  color: #fff;
+  margin: 15px;
+  border-radius: 1rem;
+}

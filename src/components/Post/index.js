@@ -112,7 +112,11 @@ export default function Post({ id, date, user, content, media = null }) {
       </div>
       <div className='post-middle-section'>
         <p className={media ? 'normal-text' : 'large-text'}>{content}</p>
-        {media ? <div className='media-container'></div> : null}
+        {media ? (
+          <div className='media-container'>
+            <img src={media} alt='media' />
+          </div>
+        ) : null}
 
         <div className='audience-interaction'>
           <div

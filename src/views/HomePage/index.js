@@ -4,7 +4,7 @@ import Author from '../../components/Author'
 import Header from '../../components/Header'
 import Post from '../../components/Post'
 import './style.css'
-import Loading from '../../components/Loading'
+import { PostSkeleton } from '../Skeleton'
 
 export default function Homepage(props) {
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -60,10 +60,16 @@ export default function Homepage(props) {
                     content={item.content}
                     date={item.date_created}
                     likes={item.likes}
+                    media={item.media}
                   />
                 ))
               : "Sorry! you Don't Have any post"}
-            {loading ? <Loading /> : null}
+            {loading ? (
+              <>
+                <PostSkeleton />
+                <PostSkeleton />
+              </>
+            ) : null}
           </div>
         </div>
       </div>

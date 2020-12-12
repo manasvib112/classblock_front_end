@@ -1,0 +1,17 @@
+.classroom-wrapper {
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
+  width: 100vw;
+}
+.classroom-main {
+  width: 100%;
+  padding: 0 10%;
+}
+.classroom-list {
+  margin-top: 20px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
