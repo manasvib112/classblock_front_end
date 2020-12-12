@@ -36,7 +36,7 @@ export default function NewComment({ total, setTotal, id }) {
       <div className='new-comment-top'>
         <img
           src={
-            JSON.parse(localStorage.userData).image
+            localStorage.userData && JSON.parse(localStorage.userData).image
               ? JSON.parse(localStorage.userData).image
               : profile
           }
