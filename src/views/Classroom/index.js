@@ -63,6 +63,7 @@ export default function Homepage(props) {
                       date={item.date_created}
                       likes={item.likes}
                       media={item.media}
+                      image={item.postedBy.image}
                     ></Post>
                   ))
                 ) : (
