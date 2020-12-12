@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './style.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 import Error from '../../components/Error'
 import { isEmpty } from 'lodash'
 
@@ -11,7 +11,7 @@ function Login(props) {
   const [uid, setUid] = useState('')
   const [password, setPassword] = useState('')
   const [visible, setVisible] = useState(false)
-  const history = useHistory()
+  const [redirect, setRedirect] = useState(false)
   const handleUid = (event) => {
     const value = event.target.value
     setUid(value)
@@ -29,7 +29,7 @@ function Login(props) {
         let { token } = data
         console.log(data)
         localStorage.setItem('token', token)
-        history.push('/home')
+        setRedirect(true)
       })
       .catch((error) => {
         // debugger
@@ -80,6 +80,9 @@ function Login(props) {
     postData('http://localhost:5000/api/user/login', { uid, password })
   }
 
+  if (redirect) {
+    return <Redirect to='/home' />
+  }
   return (
     <div className='main-container'>
       <div className='left-section'>

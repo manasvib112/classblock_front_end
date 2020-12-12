@@ -2,7 +2,7 @@ import React from 'react'
 import './style.css'
 import { Popover, Typography, Button } from '@material-ui/core'
 import image from '../../../src/asset/images/images.png'
-import profile from '../../../src/asset/images/profile.jpeg'
+import profile from '../../../src/asset/images/profile.png'
 import { isEmpty } from 'lodash'
 import {
   Notifications,
@@ -61,7 +61,15 @@ export default function Header() {
           {firstname}
         </div>
         <div className='img-section'>
-          <img src={profile} alt='profile' onClick={handleClick} />{' '}
+          <img
+            src={
+              localStorage.userData && JSON.parse(localStorage.userData).image
+                ? JSON.parse(localStorage.userData).image
+                : profile
+            }
+            alt='profile'
+            onClick={handleClick}
+          />{' '}
           <Popover
             id={pop}
             open={open}
@@ -78,7 +86,7 @@ export default function Header() {
             }}
           >
             <Typography className={{ padding: '2rem', height: '100px' }}>
-              <Button onClick={logout}>Profile</Button>
+              <Button onClick={logout}>Logout</Button>
             </Typography>
           </Popover>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
-import profile from '../../../src/asset/images/profile.jpeg'
+import profile from '../../../src/asset/images/profile.png'
 import {
   InsertEmoticon,
   InsertCommentRounded,
@@ -75,6 +75,7 @@ export default function Post({ id, date, user, content, media = null }) {
       })
       .then((response) => {
         if (response.data) {
+          console.log(response.data)
           setTotal(response.data.length)
           setCommentsData(response.data)
         }
@@ -103,7 +104,14 @@ export default function Post({ id, date, user, content, media = null }) {
   return (
     <div className='post'>
       <div className='post-top-section'>
-        <img src={profile} alt='profile' />
+        <img
+          src={
+            localStorage.userData && JSON.parse(localStorage.userData).image
+              ? JSON.parse(localStorage.userData).image
+              : profile
+          }
+          alt='profile'
+        />
         <div className='details'>
           <span>{user}</span>
           <span className='date'>{date_created}</span>
@@ -141,7 +149,13 @@ export default function Post({ id, date, user, content, media = null }) {
       <div className='post-bottom-section'>
         <NewComment id={id} total={total} setTotal={setTotal} />
         {commentsData.map((item) => (
-          <Comment name={''} body={item.body} name={item.postedBy.name} />
+          <Comment
+            key={item._id}
+            name={''}
+            body={item.body}
+            name={item.postedBy.name}
+            profile={item.postedBy.image}
+          />
         ))}
       </div>
     </div>

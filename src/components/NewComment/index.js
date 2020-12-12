@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './style.css'
-import profile from '../../../src/asset/images/profile.jpeg'
+import profile from '../../../src/asset/images/profile.png'
 import axios from 'axios'
 
 export default function NewComment({ total, setTotal, id }) {
@@ -34,7 +34,14 @@ export default function NewComment({ total, setTotal, id }) {
   return (
     <div className='new-comment'>
       <div className='new-comment-top'>
-        <img src={profile} alt='profile' />
+        <img
+          src={
+            localStorage.userData && JSON.parse(localStorage.userData).image
+              ? JSON.parse(localStorage.userData).image
+              : profile
+          }
+          alt='profile'
+        />
         <form>
           <textarea
             type='text'

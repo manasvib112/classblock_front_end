@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Loading from '../../components/Loading'
 import Header from '../../components/Header'
 import ClassCard from '../../components/ClassCard'
 import { isEmpty } from 'lodash'
@@ -26,6 +25,7 @@ export default function MyClass(props) {
         })
         .catch((error) => {
           console.log(error, Object.assign({}, error))
+          setLoading(false)
         })
     }
   }, [classRoomData])
@@ -43,7 +43,9 @@ export default function MyClass(props) {
                   <ClassCard classroom={classroom} />
                 ))
               : null}
-
+            {!loading && isEmpty(classRoomData) ? (
+              <h2 className='subtitle'>You are not registered in any class</h2>
+            ) : null}
             {loading ? (
               <>
                 <ClassCardSkeleton />

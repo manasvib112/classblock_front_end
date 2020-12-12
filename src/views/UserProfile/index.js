@@ -1,15 +1,16 @@
 import { TextField } from '@material-ui/core'
+import profile from '../../../src/asset/images/profile.png'
 import Axios from 'axios'
 import React, { useState, useEffect, useRef } from 'react'
+import spin from '../../asset/images/spin.svg'
 import isEmpty from 'lodash'
 import Header from '../../components/Header'
 import './style.css'
 
 export default function UserProfile() {
+  const [uploading, setUploading] = useState(false)
   const [userData, setUserData] = useState({})
-  const [source, setSource] = useState(
-    'https://res.cloudinary.com/classblock/image/upload/v1607721001/classblock/pfdfwqnlvqb9lftwetzt.jpg'
-  )
+  const [source, setSource] = useState('')
   const [media, setMedia] = useState(null)
   const fileUploader = useRef(null)
   useEffect(() => {
@@ -20,8 +21,9 @@ export default function UserProfile() {
         .then((response) => {
           if (response) {
             console.log(response.data)
-            const { name, username, email, uid } = response.data.payload
+            const { name, username, email, uid, image } = response.data.payload
             setUserData({ name, username, email, uid })
+            setSource(image)
           }
         })
         .catch((error) => {
@@ -31,13 +33,14 @@ export default function UserProfile() {
   }, [])
 
   const updateImage = (image) => {
-    Axios.put('http://localhost:5000/api/user/profile-image', {
-      headers: { Authorization: { token: localStorage.token } },
-      body: { image }
-    })
+    Axios.put(
+      'http://localhost:5000/api/user/profile-image',
+      { image },
+      { headers: { Authorization: localStorage.token } }
+    )
       .then((response) => {
         if (response) {
-          console.log(response.data)
+          setUploading(false)
         }
       })
       .catch((error) => {
@@ -47,6 +50,7 @@ export default function UserProfile() {
 
   const saveChanges = () => {
     if (media) {
+      setUploading(true)
       const data = new FormData()
       console.log('media to be uploaded', media)
       data.append('file', media)
@@ -94,7 +98,7 @@ export default function UserProfile() {
               onChange={uploadImage}
             ></input>
             <div className='user-profile-image-wrapper'>
-              <img src={source} alt='profile'></img>
+              <img src={source ? source : profile} alt='profile'></img>
               <div
                 className='image-uploader'
                 onClick={() => {
@@ -104,6 +108,14 @@ export default function UserProfile() {
               >
                 Upload Image
               </div>
+              {uploading ? (
+                <div className='image-uploader uploading'>
+                  <img
+                    style={{ height: '50%', width: '50%', border: 'none' }}
+                    src={spin}
+                  ></img>
+                </div>
+              ) : null}
             </div>
           </div>
           <h2 className='subtitle'>Personal</h2>
