@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './style.css'
-import profile from '../../../src/asset/images/profile.jpeg'
+import profile from '../../../src/asset/images/profile.png'
 import { PhotoLibrary, InsertEmoticon } from '@material-ui/icons'
 import axios from 'axios'
+import { isEmpty } from 'lodash'
 
 export default function Author({ total, setTotal }) {
   const fileUploader = useRef(null)
@@ -83,7 +84,16 @@ export default function Author({ total, setTotal }) {
   return (
     <div className='author'>
       <div className='author-top'>
-        <img className='profile' src={profile} alt='profile' />
+        <img
+          className='profile'
+          src={
+            localStorage.userData &&
+            JSON.parse(localStorage.userData).image.length
+              ? JSON.parse(localStorage.userData).image
+              : profile
+          }
+          alt='profile'
+        />
         <form>
           <textarea
             type='text'

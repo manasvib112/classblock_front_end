@@ -51,7 +51,7 @@
   border: 1px solid #e5e5e5;
   margin: 0px 5px;
   height: 44px;
-  width: 44px;
+  min-width: 44px;
 }
 .new-comment-bottom {
   display: flex;

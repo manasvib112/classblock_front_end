@@ -2,7 +2,7 @@
   display: flex;
   width: 100vw;
   padding-top: 160px;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   align-content: center;
   align-items: center;
@@ -19,11 +19,16 @@
 }
 .user-profile-image-wrapper {
   position: relative;
+  background-color: #ededed;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
 }
 .image-uploader {
   display: none;
 }
-.user-profile-image-wrapper:hover .image-uploader {
+.user-profile-image-wrapper:hover .image-uploader,
+.image-uploader.uploading {
   height: 190px;
   width: 190px;
   top: 5px;

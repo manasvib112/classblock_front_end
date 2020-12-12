@@ -8,9 +8,8 @@ import { PostSkeleton } from '../Skeleton'
 
 export default function Homepage(props) {
   const [token, setToken] = useState(localStorage.getItem('token'))
-  const [userData, setUserData] = useState(
-    JSON.parse(localStorage.getItem('userData'))
-  )
+  const [userData, setUserData] = useState()
+
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [totalPosts, setTotalPosts] = useState(0)
@@ -43,7 +42,7 @@ export default function Homepage(props) {
         setLoading(false)
       })
       .catch((error) => console.log(error))
-  }, [totalPosts])
+  }, [totalPosts, token])
   return (
     <div className='home-wrappper'>
       <div className='home-container'>

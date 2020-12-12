@@ -1,5 +1,6 @@
 import { Avatar } from '@material-ui/core'
 import { AvatarGroup } from '@material-ui/lab'
+import profile from '../../../src/asset/images/profile.png'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import './style.css'
@@ -22,7 +23,13 @@ export default function index({ classroom }) {
           <AvatarGroup max={3}>
             {classroom.students.map((student) =>
               student ? (
-                <Avatar key={student.id}>{student.name[0]}</Avatar>
+                <Avatar
+                  key={student.id}
+                  src={student.image ? student.image : profile}
+                  alt={student.name}
+                >
+                  {student.name[0]}
+                </Avatar>
               ) : null
             )}
           </AvatarGroup>

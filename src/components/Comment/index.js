@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css'
-import profile from '../../../src/asset/images/profile.jpeg'
+import profile from '../../../src/asset/images/profile.png'
 
 export default function Comment(props) {
   const details = '-'

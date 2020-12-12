@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './style.css'
-import profile from '../../../src/asset/images/profile.jpeg'
+import profile from '../../../src/asset/images/profile.png'
 import { PhotoLibrary, InsertEmoticon, HelpOutline } from '@material-ui/icons'
 import axios from 'axios'
 import { Checkbox, FormControlLabel } from '@material-ui/core'
@@ -85,7 +85,15 @@ export default function Author({ total, setTotal, classId }) {
   return (
     <div className='class author'>
       <div className='class author-top'>
-        <img className='profile' src={profile} alt='profile' />
+        <img
+          className='profile'
+          src={
+            localStorage.userData && JSON.parse(localStorage.userData).image
+              ? JSON.parse(localStorage.userData).image
+              : profile
+          }
+          alt='profile'
+        />
         <form>
           <textarea
             type='text'
