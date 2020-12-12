@@ -18,7 +18,7 @@ const formatDate = (dateString) => {
   return date
 }
 
-export default function Post({ id, date, user, content, media = null }) {
+export default function Post({ id, date, user, content, media = null, image }) {
   const userData = JSON.parse(localStorage.getItem('userData'))
   const date_created = formatDate(date)
   const [commentsData, setCommentsData] = useState([])
@@ -27,7 +27,7 @@ export default function Post({ id, date, user, content, media = null }) {
   const [isLiked, setIsLiked] = useState(false)
   const [likeCount, setLikeCount] = useState()
   const [likes, setLikes] = useState([])
-  // console.log(content, isLiked, likes)
+  console.log('user image', image)
   const handleLike = () => {
     if (isLiked === true) {
       console.log('calling unlike')
@@ -104,14 +104,7 @@ export default function Post({ id, date, user, content, media = null }) {
   return (
     <div className='post'>
       <div className='post-top-section'>
-        <img
-          src={
-            localStorage.userData && JSON.parse(localStorage.userData).image
-              ? JSON.parse(localStorage.userData).image
-              : profile
-          }
-          alt='profile'
-        />
+        <img src={!isEmpty(image) ? image : profile} alt='profile' />
         <div className='details'>
           <span>{user}</span>
           <span className='date'>{date_created}</span>
